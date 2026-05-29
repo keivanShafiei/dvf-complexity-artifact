@@ -205,7 +205,7 @@ If you use this artifact in your research, please cite:
   author={Shafiei, Amirkeivan and Mosavi Nezhad, Seyed Mojtaba},
   journal={Computational Mechanics},
   year={2026},
-  publisher={Elsevier},
+  publisher={Springer},
   note={Artifact available at \url{https://doi.org/10.5281/zenodo.20444297}}
 }
 ```
