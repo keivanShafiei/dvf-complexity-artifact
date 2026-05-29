@@ -1,0 +1,14 @@
+{
+  "solver": "mincut_rigid",
+  "energy": 1.0404401145198807,
+  "fracture_energy": 1.0404401145198807,
+  "elastic_energy": 0.0,
+  "severed_bonds": [
+    0,
+    1,
+    6,
+    7
+  ],
+  "runtime": 0.0022737979888916016,
+  "note": "Exact min-cut under rigid-block kinematics (Prop 5.1). This is an UPPER BOUND on the relaxed-kinematics optimum."
+}

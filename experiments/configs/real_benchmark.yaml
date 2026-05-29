@@ -1,0 +1,11 @@
+real:
+  beta: 6.0  # Balanced: between 4.0 (over) and 8.0 (under)
+  tau_spec: 0.20  # Balanced: between 0.15 (over) and 0.30 (under)
+  terminal_strategy: "x_min_x_max"  # یا "circular" برای نمونه‌های حلقوی
+  Gc: 1.0
+  n_steps: 20
+  kappa: 1.0
+  raw_mesh_dir: "data/raw"
+
+# --- Option C parameters ---
+  u_bar: 5.0  # Matches stored canonical results (SHA-256 verified)

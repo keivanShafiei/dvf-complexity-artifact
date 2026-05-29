@@ -1,0 +1,27 @@
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+env/
+venv/
+
+# Snakemake cache
+.snakemake/
+
+# Logs
+logs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+
+# Temporary outputs (اختیاری: اگر حجم results و figures زیاد است، آن‌ها را فقط در Zenodo نگه دارید)
+# experiments/data/results/
+# experiments/data/epistemic/
+# figures/*.pdf

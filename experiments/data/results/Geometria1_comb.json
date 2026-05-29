@@ -1,0 +1,15 @@
+{
+  "solver": "combinatorial_bound",
+  "energy": 1.0404401145198807,
+  "fracture_energy": 1.0404401145198807,
+  "elastic_energy": 0.0,
+  "severed_bonds": [
+    0,
+    1,
+    6,
+    7
+  ],
+  "cut_value": 1.0404401145198807,
+  "runtime": 0.007462501525878906,
+  "note": "Upper bound on relaxed optimum: min-cut topology + free FEM u."
+}

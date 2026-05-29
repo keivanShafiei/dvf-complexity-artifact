@@ -1,0 +1,7 @@
+toy_model:
+  grid_size: 5
+ggni:
+  beta: 4.0
+  tau_spec: 0.15
+scaling:
+  sizes: [5, 10, 20, 40]

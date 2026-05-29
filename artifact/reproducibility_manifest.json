@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2026-05-29T11:11:57.094276",
+  "checksums": {
+    "experiments/data/results/Geometria1_comb.json": "afdeb2aa8e65a79f7ffc4a1bd3fc58f61c4e6a7a8647027256e26692b9d912fb",
+    "experiments/data/results/Geometria1_gd.json": "eca676b5eb8b2ada85f5737c2e642a99df81661fbcf1299daea54159629b61b8",
+    "experiments/data/results/Geometria1_mincut.json": "a39e808172489328ecd053896561636dd72631e3e54c4bd4f10c3f54c430fa7c",
+    "experiments/data/results/Geometria1_sa.json": "02e1297085710e4f3552e8c2f41186986c54ddb2e4910bd2ed8d567bd88b1ab3",
+    "experiments/data/results/Geometria_Transfinita_comb.json": "856bfd845aa7cfffa1d577b10ad494ae01ac75e244591b5c6d08c92a7870639d",
+    "experiments/data/results/Geometria_Transfinita_gd.json": "6291186a74d33f7637321cc5eb21cb92e6f5dec2a49ef6c22b32288ad8d0074f",
+    "experiments/data/results/Geometria_Transfinita_ggni.json": "d52185d4fda943b7c3efd43cec8c0c5fc9bc1bc38dabb7f67cde51053b695d7f",
+    "experiments/data/results/Geometria_Transfinita_mincut.json": "e184aa4ef33b5f4ddfe5187dcc4b52b1e5c6a85924802b8efa501f6ec32a3a13",
+    "experiments/data/results/Geometria_Transfinita_sa.json": "b77b1c9a77d026e23d20a73654a889820171844d3d9ae9025df4806c93bff112",
+    "figures/Geometria1_crack_paths.pdf": "7e95d16de9bcce1ac19698d3c46469e3ce87d48e69b4f944654b63f349431bbc",
+    "figures/Geometria1_ggni_trace.pdf": "d8e65749755306cacbf9b16dfe91e7cf7ff6cbbe2e41431687517ab762764b3f",
+    "figures/Geometria_Transfinita_crack_paths.pdf": "cb358dfc553bb14979aade5afc90366f423f046e4f630b12ca0846fab0347c68",
+    "figures/Geometria_Transfinita_ggni_trace.pdf": "9a54d909bddde780c6c289af834be63af1124a155822c3834ee6fe43318c97b5",
+    "figures/fig_ggni_sensitivity_scaling.pdf": "d3f62b02eac2ce8691f31748c3da81a9a87e388b38868a5ee44767225b1db377",
+    "figures/fig_solver_comparison.pdf": "5a1bcbce3915e891df5f6eeabd7b6f513db936fc2c20771625074897fc50f99a",
+    "figures/fig_spectral_analysis.pdf": "e69ddb045ad88f26dbe9cd80d019b267479afd8bccf1e114e9ccb4c3c40a0af2",
+    "tables/comprehensive_benchmark.tex": "f7953fe25a9bef5354e3cd89bb6ff1421c3c3c085eef64580dd62be73046ee26",
+    "tables/ggni_trace_summary.tex": "53e4ead9d8bc1ac45a3d8680314028c6417c509f922614a38a2e30771599dbf0"
+  }
+}

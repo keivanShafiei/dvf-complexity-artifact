@@ -1,0 +1,14 @@
+{
+  "solver": "gd",
+  "energy": 0.6868867239266092,
+  "fracture_energy": 0.686886723926607,
+  "elastic_energy": 2.220446049250313e-15,
+  "severed_bonds": [
+    0,
+    1,
+    7
+  ],
+  "iterations": 3,
+  "runtime": 0.012387752532958984,
+  "note": "Alternating minimization (local minimum trap per Remark rem:algorithmic_implications (NP-hardness and local minima))."
+}
