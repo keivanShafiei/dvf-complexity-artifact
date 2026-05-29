@@ -194,14 +194,7 @@ real:
 If you use this artifact in your research, please cite:
 
 ```bibtex
-@article{dvf_complexity_2026,
-  title={Computational Complexity of Discrete Variational Fracture: NP-Hardness, Reductions, and Polynomial Subcases},
-  author={Author et al. and [Co-authors]},
-  journal={Computer Methods in Applied Mechanics and Engineering},
-  year={2026},
-  doi={10.1016/j.cma.2026.XXXXXX},
-  note={Artifact available at \url{https://doi.org/10.5281/zenodo.TBD}}
-}
+
 ```
 
 ---
