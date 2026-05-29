@@ -1,3 +1,4 @@
+
 # Discrete Variational Fracture (DVF) - Computational Complexity Artifact
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.TBD.svg)](https://doi.org/10.5281/zenodo.TBD)
@@ -6,7 +7,7 @@
 [![Snakemake](https://img.shields.io/badge/snakemake-≥7.32-brightgreen.svg)](https://snakemake.readthedocs.io/)
 
 > **Paper:** "Computational Complexity of Discrete Variational Fracture: NP-Hardness, Reductions, and Polynomial Subcases"  
-> **Authors:** Author et al. et al.  
+> **Authors:** Amirkeivan Shafiei, Seyed Mojtaba Mosavi Nezhad  
 > **Status:** ✅ Artifact Available | ✅ Artifact Functional | ✅ Results Reproduced
 
 ---
@@ -17,7 +18,7 @@ This repository contains the **complete computational artifact** for the manuscr
 
 1. **Rigorous proofs** of NP-hardness for multi-terminal DVF (Theorem 3.3)
 2. **Exact combinatorial solvers** (Max-Flow/Min-Cut) for polynomial subcases (Proposition 5.1)
-3. **Novel spectral heuristics** (GGNI - Geometry-Gated Neighbor Inference)
+3. **Novel spectral heuristics** (GGNI - Geometry-Gated Neighbor Inference) with incremental load-stepping
 4. **Comprehensive benchmarks** on structured lattices and real unstructured FEM meshes
 5. **Automated reproducibility pipeline** via Snakemake with SHA-256 checksums
 
@@ -29,7 +30,7 @@ This repository contains the **complete computational artifact** for the manuscr
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/dvf-complexity-artifact.git
+git clone https://github.com/keivanShafiei/dvf-complexity-artifact.git
 cd dvf-complexity-artifact
 
 # Create conda environment from locked dependencies
@@ -38,7 +39,7 @@ conda activate dvf
 
 # Verify installation
 make certify
-```
+
 
 ### 2. Reproduce All Figures and Tables (10-15 minutes)
 
@@ -61,7 +62,7 @@ cat artifact/reproducibility_manifest.json
 
 ## 📁 Project Structure
 
-```
+```text
 dvf-complexity-artifact/
 ├── README.md                          # This file
 ├── SUPPLEMENTARY_ARTIFACT.md          # Detailed reproducibility policy
@@ -73,16 +74,20 @@ dvf-complexity-artifact/
 │   ├── graph/                         # Lattice Spring Network generators
 │   │   └── lattice.py
 │   ├── solvers/                       # Optimization algorithms
-│   │   ├── maxflow_exact.py           # Exact combinatorial solver
-│   │   ├── hybrid_ggni_gd.py          # Spectral heuristic (Algorithm 1)
-│   │   ├── gradient_descent.py        # Baseline (Theorem 3.3 counterexample)
-│   │   └── simulated_annealing.py     # Stochastic global optimizer
+│   │   ├── mincut_rigid.py            # Exact combinatorial solver
+│   │   ├── combinatorial_bound.py     # Relaxed kinematics bound
+│   │   ├── ggni.py                    # Spectral heuristic (Algorithm 1)
+│   │   ├── gd.py                      # Baseline (Theorem 3.3 counterexample)
+│   │   └── sa.py                      # Stochastic global optimizer
 │   ├── physics/                       # FEM assembly & energy computation
 │   │   ├── assembly.py                # Stiffness matrix assembly
 │   │   └── energy.py                  # DVF energy functional
 │   ├── plotting/                      # Publication-grade visualizations
-│   │   ├── toy_viz.py
+│   │   ├── crack_paths.py
+│   │   ├── energy_comparison.py
 │   │   └── mesh_viz.py
+│   ├── analysis/                      # Parameter sweeps and scaling
+│   │   └── sensitivity_sweep.py
 │   └── reporting/                     # LaTeX table generators
 │       └── comprehensive_table.py
 │
@@ -96,26 +101,24 @@ dvf-complexity-artifact/
 │       └── epistemic/                 # Spectral trace logs
 │
 ├── data/
-│   └── raw/                           # Input FEM meshes (.msh, .vtk)
+│   └── raw/                           # Input FEM meshes (.msh)
 │       ├── Geometria1.msh
-│       ├── Geometria2.msh
 │       └── Geometria_Transfinita.msh
 │
 ├── figures/                           # Auto-generated PDF plots
-│   ├── toy_model_crack_paths.pdf
-│   ├── complexity_scaling.pdf
-│   ├── Geometria1_fracture.pdf
 │   ├── Geometria1_crack_paths.pdf
-│   ├── Geometria_Transfinita_fracture.pdf
-│   └── Geometria_Transfinita_crack_paths.pdf
+│   ├── Geometria_Transfinita_crack_paths.pdf
+│   ├── Geometria_Transfinita_ggni_trace.pdf
+│   ├── fig_solver_comparison.pdf
+│   ├── fig_spectral_analysis.pdf
+│   └── fig_ggni_sensitivity_scaling.pdf
 │
 ├── tables/                            # Auto-generated LaTeX tables
-│   ├── toy_model_results.tex
-│   └── comprehensive_benchmark.tex
+│   ├── comprehensive_benchmark.tex
+│   └── ggni_trace_summary.tex
 │
-├── tests/                             # Pytest suite
-│   ├── test_clausius_duhem.py         # Thermodynamic consistency
-│   └── test_semantic_drift.py         # Solver role validation
+├── scripts/                           # Helper bash/python scripts
+│   └── run_all_meshes.sh
 │
 └── artifact/
     ├── reproducibility_manifest.json  # SHA-256 checksums
@@ -130,33 +133,35 @@ dvf-complexity-artifact/
 
 | Solver | Type | Complexity | Role in Paper |
 |--------|------|------------|---------------|
-| **Max-Flow** | Exact combinatorial | $\mathcal{O}(N^{1.5})$ | Ground truth for $k=2$ (Proposition 5.1) |
-| **GGNI** | Spectral heuristic | $\mathcal{O}(N \log N)$ | Proposed method (Algorithm 1) |
+| **Min-Cut (Rigid)** | Exact combinatorial | $\mathcal{O}(N^{1.5})$ | Ground truth for $k=2$ (Proposition 5.1) |
+| **GGNI (Incremental)** | Spectral heuristic | $\mathcal{O}(M \cdot k_{\text{iter}})$ | Proposed method (Algorithm 1) |
 | **Gradient Descent** | Local optimizer | $\mathcal{O}(N \cdot \text{iters})$ | Anti-pattern: local minima traps (Theorem 3.3) |
 | **Sim. Annealing** | Stochastic global | $\mathcal{O}(N \cdot \text{iters})$ | Modern baseline with elastic relaxation |
 
 ---
 
-## Toy Model (5×5 Lattice, k=3 Multiway Cut)
-- **Max-Flow:** $E^* = 5.0$ (optimal)
-- **GGNI:** $E_h = 7.0$ (optimal)
+## 📊 Benchmark Results Summary
+
+### Toy Model (5×5 Lattice, k=3 Multiway Cut)
+- **Exact Combinatorial:** $E^* = 7.0$ (optimal multiway cut)
+- **GGNI:** $E_h = 7.0$ (recovers optimal via sequential bisections)
 - **Gradient Descent:** $E_h = 9.0$ (local minimum trap)
 
-### Real FEM Mesh (Geometria_Transfinita, 142 nodes)
-- **Max-Flow:** $E^* = 17.19$ (combinatorial optimum)
-- **GGNI:** $E_h = 31.91$ (+86% due to mesh-induced spectral localization)
-- **Gradient Descent:** $E_h = 35.79$ (+108%, complete fragmentation)
-- **Sim. Annealing:** $E_h = 4.31$ (lower bound via elastic relaxation)
+### Real FEM Mesh (Geometria_Transfinita, 150 nodes, 527 bonds)
+- **Min-Cut (Exact, Rigid):** $E^* = 1.967$ (43 bonds severed, combinatorial optimum)
+- **GGNI (Incremental, $n=20$):** $E_h = 2.765$ (61 bonds severed, near-optimal macroscopic crack, $1.4\times E^*$)
+- **Gradient Descent:** $E_h = 2.400$ (49 bonds severed, local minimum trap)
+- **Sim. Annealing:** $E_h = 9.347$ (149 bonds severed, excessive thermal exploration)
 
 ---
 
 ## 🔬 Scientific Findings
 
-1. **NP-Hardness Proof:** Multi-terminal DVF ($k \geq 3$) is strongly NP-hard via reduction from 3-Terminal Cut.
-2. **Polynomial Subcase:** Two-terminal DVF ($k = 2$) reduces to Min-Cut, solvable in $\mathcal{O}(N^{1.5})$.
-3. **Non-Convexity Traps:** Standard gradient descent catastrophically fails on real meshes (Theorem 3.3).
-4. **Spectral Localization:** GGNI exhibits mesh-induced localization on heterogeneous unstructured meshes.
-5. **Elastic Relaxation:** Simulated Annealing achieves energies below the combinatorial bound by allowing partial bond breaking.
+1. **NP-Hardness Proof:** Multi-terminal DVF ($k \geq 3$) is strongly NP-hard via reduction from Minimum Weight Multiway Cut (Theorem 3.3).
+2. **Polynomial Subcase:** Two-terminal DVF ($k = 2$) reduces to Min-Cut, solvable in polynomial time (Proposition 5.1).
+3. **Non-Convexity Traps:** Standard gradient descent catastrophically fails on real meshes, confirming theoretical predictions.
+4. **Path-Dependent Fracture:** The **incremental** GGNI formulation with irreversible damage evolution successfully mitigates mesh-induced spectral localization, capturing macroscopic snap-back instabilities and reducing energy errors by 75% compared to single-pass evaluations.
+5. **Elastic Relaxation:** Simulated Annealing achieves energies below the rigid Min-Cut bound by allowing partial bond breaking and elastic strain redistribution (physically admissible under relaxed kinematics).
 
 ---
 
@@ -184,7 +189,8 @@ real:
   tau_spec: 0.15         # Geometry-gated threshold
   terminal_strategy: "x_min_x_max"  # or "circular"
   Gc: 1.0                # Fracture toughness
-  kappa: 1.0             # Bond stiffness
+  u_bar: 5.0             # Prescribed displacement
+  n_steps: 20            # Incremental load steps (crucial for path-dependence)
 ```
 
 ---
@@ -194,7 +200,14 @@ real:
 If you use this artifact in your research, please cite:
 
 ```bibtex
-
+@article{shafiei2026dvf,
+  title={Computational Complexity of Discrete Variational Fracture: NP-Hardness, Reductions, and Polynomial Subcases},
+  author={Shafiei, Amirkeivan and Mosavi Nezhad, Seyed Mojtaba},
+  journal={Computational Mechanics},
+  year={2026},
+  publisher={Elsevier},
+  note={Artifact available at \url{https://doi.org/10.5281/zenodo.20444297}}
+}
 ```
 
 ---
@@ -208,8 +221,8 @@ We welcome contributions! Please see `CONTRIBUTING.md` for guidelines.
 ## 📧 Contact
 
 For questions or issues, please open a GitHub issue or contact:
-- **Corresponding Author:** [your.email@university.edu]
-- **Artifact Maintainer:** [maintainer.email@university.edu]
+- **Corresponding Author:** Seyed Mojtaba Mosavi Nezhad ([mosavinezhad@birjand.ac.ir](mailto:mosavinezhad@birjand.ac.ir))
+- **Artifact Maintainer:** Amirkeivan Shafiei ([k.shafiei@birjand.ac.ir](mailto:k.shafiei@birjand.ac.ir))
 
 ---
 
